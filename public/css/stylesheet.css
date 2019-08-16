@@ -1,0 +1,163 @@
+body {
+    padding-top: 3.5rem;
+    font-family: 'Varela Round', sans-serif;
+}
+
+@media (max-width: 600px) {
+    #lgimg {
+        display: none;
+    }
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jumbotron {
+    background-image: url(../images/home-jumbo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    min-height: 300px;
+}
+
+#table {
+    font-size: 15px;
+}
+
+header {
+    text-align: center;
+}
+
+footer {
+    text-align: right;
+}
+
+.dark-footer {
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(36, 39, 38);
+    color: white;
+    text-align: center;
+}
+
+
+/* label {
+    font-weight: bold;
+} */
+
+.bordered-box {
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 2px;
+    padding: 25px;
+}
+
+.result-box {
+    background-color: rgba(38, 128, 217, .2);
+    margin: 15px 0 0;
+    padding: 25px;
+    display: none;
+}
+
+.alert {
+    display: none;
+}
+
+.red,
+.error {
+    color: red;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+
+/* .image {
+    width: 300px;
+    height: 225px;
+}
+*/
+
+.image-md {
+    width: 310px;
+    height: 240px;
+}
+
+.image-sm {
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.students {
+    display: none;
+}
+
+legend.scheduler-border {
+    width: inherit;
+    /* Or auto */
+    padding: 0 10px;
+    /* To give a bit of padding on the left and right */
+    border-bottom: none;
+}
+
+
+/********************/
+
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
+    color: #c33;
+    border-color: #c33;
+}
+
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus {
+    border-color: #c33;
+    -webkit-box-shadow: 0 0 6px #fcc;
+    -moz-box-shadow: 0 0 6px #fcc;
+    box-shadow: 0 0 6px #fcc;
+}
+
+input:invalid,
+textarea:invalid,
+select:invalid {
+    border-bottom: 1px solid #c33;
+}
+
+input:valid+.invalid
+/* Adjacent sibling selector */
+
+{
+    visibility: hidden;
+}
+
+input:invalid+.invalid {
+    visibility: visible;
+}
+
+input:required {
+    border-left: 4px solid #c33;
+}
+
+input:valid {
+    border-bottom: transparent;
+}
+
+.invalid {
+    color: #999;
+}
