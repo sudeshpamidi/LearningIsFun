@@ -1,5 +1,12 @@
+/** 
+ * Dicription: This script contains supporting functions for courses.html
+ * Author : Sudesh Pamidi
+ */
 "use strict"
 
+/**
+ * These are custome labels mapping to the json fields.
+ */
 let courseLabels = {
     CourseId: "Course Id:",
     Title: "Title:",
@@ -23,6 +30,11 @@ $(document).ready(function() {
         window.history.back();
     });
 
+    /**
+     * This function makes a call to restful services and gets the course information and 
+     * display in the tbody element.
+     * @param {string} courseId  -- Course Id
+     */
     function displayCourse(courseId) {
         let url = "/api/courses/" + courseId;
         $.get(url, function(data) {
@@ -36,7 +48,6 @@ $(document).ready(function() {
                     markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td><tr>"
                 }
 
-
                 $("#tbody").append(markup);
             });
 
@@ -46,12 +57,15 @@ $(document).ready(function() {
                 addToTable(course.Students);
             }
 
-            $("#tableCourse").addClass = "table-striped"
+            $("#tableCourse").addClass("table-striped");
 
         });
     };
 
-
+    /**
+     * Display the students information in the table rows.
+     * @param {object} students 
+     */
     function addToTable(students) {
         console.log(students);
         students.forEach(function(e) {
@@ -60,10 +74,18 @@ $(document).ready(function() {
         });
     };
 
+    /**
+     * clears the table content. 
+     * @param {string} table 
+     * This function is not been utilized. Need to refactor.
+     */
     function clearResults(table) {
         table.empty();
     }
 
+    /**
+     * add the row header to the student table.
+     */
     function addRowHeader() {
         let markup = "<tr><th>Student Name</th><th>Email</th></tr>"
         $("#tableStudents").append(markup)

@@ -1,3 +1,7 @@
+/** 
+ * Dicription: This script contains supporting functions for courses.html
+ * Author : Sudesh Pamidi
+ */
 "use strict"
 
 $(document).ready(function() {
@@ -8,14 +12,19 @@ $(document).ready(function() {
 
     $("#course").on("change", displayCourses);
 
+    /**
+     * Display the course information in the table.
+     */
     function displayCourses() {
         clearResults($("#tableCourses"));
         displayCoursesByCategory($("#course").val());
-
-        $("#tableCourses").addClass("table-hover table-bordered table-striped");
-
+        $("#tableCourses").addClass("table-striped"); //not working need to look into it
     }
 
+    /**
+     * Display all the courses 
+     * This function is not utilized. 
+     */
     function displayAllCourses() {
         let url = "/api/courses";
         $.get(url, function(json) {
@@ -25,7 +34,11 @@ $(document).ready(function() {
         });
     };
 
-
+    /**
+     * Display the course information by category. 
+     * all -- provides all the courses.
+     * @param {string} category 
+     */
     function displayCoursesByCategory(category) {
 
         let url = "/api/courses/bycategory/" + category;
@@ -57,6 +70,10 @@ $(document).ready(function() {
         });
     };
 
+    /**
+     * Display course information in the table -#tableCourses
+     * @param {object} data  -- Courses object from Restfull services
+     */
     function addToTable(data) {
         data.forEach(function(e) {
             let url = "<a href='details.html?id=" + e.CourseId + "'>Details</a>";
@@ -66,11 +83,18 @@ $(document).ready(function() {
 
     };
 
+    /**
+     * clears the table information.
+     * @param {*} table 
+     */
     function clearResults(table) {
         table.empty();
     }
 
-    function addRowHeader() { //(table, product) {
+    /**
+     * creating header in the table
+     */
+    function addRowHeader() {
         let markup = "<tr><th>Title</th><th>Start Date</th><th>Location</th><th>Details</th></tr>"
         $("#tableCourses").append(markup)
     }
