@@ -1,11 +1,20 @@
+/** 
+ * Dicription: This script contains supporting functions for register.html
+ * Author : Sudesh Pamidi
+ *
+ */
 "use strict"
 $(document).ready(function() {
 
     let urlParams = new URLSearchParams(location.search);
     let courseId = urlParams.get("id");
 
+
     $("#courseid").val(courseId);
 
+    /**
+     * register button click event.
+     */
     $("#register").click(function() {
 
         if (!validator.validate('frmRegister')) {
@@ -26,15 +35,9 @@ $(document).ready(function() {
         window.history.back();
     });
 
-    // function validateForm() {
-    //     if (!$("#frmRegister")[0].checkValidity()) {
-
-    //         return false;
-    //     } else
-    //         return true;
-    // }
-
-
+    /**
+     * Validation utility, validates the form elements and popover the message.
+     */
     var ValidationUtility = function() {
         var elements, elementCount;
         elements = $('[data-role="validate"]'),
@@ -72,13 +75,4 @@ $(document).ready(function() {
     };
 
     var validator = new ValidationUtility();
-
-    // $('[data-role="trigger-validation"]').click(function() {
-
-    //     if (validator.validate('email-form')) {
-    //         $('#msg').text('Valid');
-    //     } else {
-    //         $('#msg').text('Invalid');
-    //     }
-    // });
 });
