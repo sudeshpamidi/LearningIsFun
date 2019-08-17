@@ -8,35 +8,35 @@ $(document).ready(function() {
 
     $("#register").click(function() {
 
-        if (!validateForm()) {
+        if (!validator.validate('frmRegister')) {
             return;
-        }
+        };
+
         let postData = $("#frmRegister").serialize();
         let url = "/api/register";
         $.post(url, postData, function(data) {
-            alert("Saved");
+            $("#msg").toggle();
+            $("#msg").html("Student Name:" + $("#studentname").val() + " successfully registered to the course: " + $("#courseid").val());
+            $("#register").prop("disabled", true);
+            $("#cancel").text("OK");
         });
     });
-
 
     $("#cancel").on('click', function() {
         window.history.back();
     });
 
-    function validateForm() {
-        if (!$("#frmRegister")[0].checkValidity()) {
+    // function validateForm() {
+    //     if (!$("#frmRegister")[0].checkValidity()) {
 
-            return false;
-        } else
-            return true;
-    }
-
-
+    //         return false;
+    //     } else
+    //         return true;
+    // }
 
 
     var ValidationUtility = function() {
         var elements, elementCount;
-
         elements = $('[data-role="validate"]'),
             elementCount = 0;
 
@@ -46,7 +46,8 @@ $(document).ready(function() {
 
         elements.on('invalid', function() {
             if (elementCount === 0) {
-                $('#' + this.id).popover('show');
+                //$('#' + this.id).popover('show');
+                $(this).popover('show');
                 elementCount++;
             }
         });
@@ -72,12 +73,12 @@ $(document).ready(function() {
 
     var validator = new ValidationUtility();
 
-    $('[data-role="trigger-validation"]').click(function() {
+    // $('[data-role="trigger-validation"]').click(function() {
 
-        if (validator.validate('email-form')) {
-            $('#msg').text('Valid');
-        } else {
-            $('#msg').text('Invalid');
-        }
-    });
+    //     if (validator.validate('email-form')) {
+    //         $('#msg').text('Valid');
+    //     } else {
+    //         $('#msg').text('Invalid');
+    //     }
+    // });
 });

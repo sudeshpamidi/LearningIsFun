@@ -8,7 +8,8 @@ let courseLabels = {
     StartDate: "Start Date:",
     EndDate: "End Date:",
     Fee: "Fee:",
-    Meets: "Time:"
+    Meets: "Time:",
+    Students: "No of Students:"
 };
 
 $(document).ready(function() {
@@ -28,7 +29,14 @@ $(document).ready(function() {
             let course = JSON.parse(data);
             console.log(course);
             Object.keys(courseLabels).forEach(function(key, i) {
-                let markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td><tr>"
+                let markup
+                if (key == "Students") {
+                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key].length + "</td><tr>"
+                } else {
+                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td><tr>"
+                }
+
+
                 $("#tbody").append(markup);
             });
 

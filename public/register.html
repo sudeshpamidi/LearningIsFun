@@ -29,9 +29,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="courses.html">Courses<span class="sr-only"></span></a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="mountains.html">Mountains<span class="sr-only"></span></a>
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -44,7 +41,6 @@
         <div class="jumbotron">
             <div class="container text-center">
                 <h1>Learning is Fun</h1>
-                <p class="lead" id="today"> 2nd Aug 2019 | 78° F</p>
             </div>
         </div>
     </header>
@@ -55,6 +51,7 @@
 
             <div class="row">
                 <div class="col-lg-4 offset-lg-4">
+                    <h2>Registration</h2>
                     <form class="mb-2" id="frmRegister" action="#" method="GET">
                         <!-- <div class="text-center mb-4">
                             <img src="images/hotel.svg" class="bd-placeholder-img image-sm" alt="saving">
@@ -72,7 +69,7 @@
                             <label for="studentname" class="col-sm-6 col-form-label">Student Name:</label>
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <input type="text" class="form-control mb-1" pattern="[a-zA-Z ]{5,}" title="Student Name" maxlength="30" placeholder="Student Name" id="studentname" name="studentname" aria-label="Student Name" required data-content="A Student Name is required. The Student must be a series of alpha-numeric characters only."
+                                    <input type="text" class="form-control mb-1" pattern="[a-zA-Z ]{5,}" title="Student Name" maxlength="30" placeholder="Student Name" id="studentname" name="studentname" aria-label="Student Name" required data-content="A Student Name is required. The Student must be a series of alpha-numeric characters only, minimum of 5 characters."
                                         data-role="validate">
                                 </div>
                             </div>
@@ -86,18 +83,17 @@
                                 </div>
                             </div>
                         </div>
-                        <p>
-                            <a class="btn text-white btn-success" data-role="trigger-validation" id="register" role="button">Register</a>
-                            <button type="button" id="cancel" class="btn btn-success">Cancel</button>
-
-                        </p>
                     </form>
-                    <div class="result-box text-xl text-center" id="results"></div>
+                    <p>
+                        <button class="btn text-white btn-success" data-role="trigger-validation" id="register">Register</button>
+                        <button type="button" id="cancel" class="btn btn-success">Cancel</button>
+
+                    </p>
+
+                    <div class="msg-box text-xl text-center mb-4" id="msg"></div>
                     <div class="alert alert-danger" role="alert" id="alert"></div>
                 </div>
-
             </div>
-
             <!-- end of row -->
         </div>
     </main>
