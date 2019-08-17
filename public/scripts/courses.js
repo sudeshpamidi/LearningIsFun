@@ -11,6 +11,9 @@ $(document).ready(function() {
     function displayCourses() {
         clearResults($("#tableCourses"));
         displayCoursesByCategory($("#course").val());
+
+        $("#tableCourses").addClass("table-hover table-bordered table-striped");
+
     }
 
     function displayAllCourses() {
@@ -68,7 +71,7 @@ $(document).ready(function() {
     }
 
     function addRowHeader() { //(table, product) {
-        let markup = "<tr><th>Title #</th><th>StartDate</th><th>Location</th><th>Details</th></tr>"
+        let markup = "<tr><th>Title</th><th>Start Date</th><th>Location</th><th>Details</th></tr>"
         $("#tableCourses").append(markup)
     }
 });
