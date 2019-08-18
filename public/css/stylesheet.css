@@ -116,18 +116,14 @@ select:focus:invalid */
     border-color: #c33;
 }
 
-input:focus:invalid:focus,
-textarea:focus:invalid:focus,
-select:focus:invalid:focus {
+input:focus:invalid:focus {
     border-color: #c33;
     -webkit-box-shadow: 0 0 6px #fcc;
     -moz-box-shadow: 0 0 6px #fcc;
     box-shadow: 0 0 6px #fcc;
 }
 
-input:invalid,
-textarea:invalid,
-select:invalid {
+input:invalid {
     /*border-bottom: 1px solid #c33;*/
     border: 1px solid #c33;
 }
