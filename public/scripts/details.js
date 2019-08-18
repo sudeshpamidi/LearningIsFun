@@ -39,13 +39,12 @@ $(document).ready(function() {
         let url = "/api/courses/" + courseId;
         $.get(url, function(data) {
             let course = JSON.parse(data);
-            console.log(course);
             Object.keys(courseLabels).forEach(function(key, i) {
                 let markup
                 if (key == "Students") {
-                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key].length + "</td><tr>"
+                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key].length + "</td></tr>"
                 } else {
-                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td><tr>"
+                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td></tr>"
                 }
 
                 $("#tbody").append(markup);

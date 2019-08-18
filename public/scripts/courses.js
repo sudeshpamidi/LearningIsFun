@@ -80,7 +80,6 @@ $(document).ready(function() {
             let markup = "<tr><td>" + e.Title + "</td><td>" + e.StartDate + "</td><td>" + e.Location + "</td><td>" + url + "</td></tr>";
             $("#tableCourses").append(markup);
         });
-
     };
 
     /**
@@ -95,7 +94,7 @@ $(document).ready(function() {
      * creating header in the table
      */
     function addRowHeader() {
-        let markup = "<tr><th>Title</th><th>Start Date</th><th>Location</th><th>Details</th></tr>"
+        let markup = "<tr><th>Title</th><th>Start Date</th><th>Location</th><th>Details</th></tr>";
         $("#tableCourses").append(markup)
     }
 });
