@@ -8,7 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/v4-shims.css">
+
     <link rel="stylesheet" href="/css/stylesheet.css">
     <title>Learning is Fun</title>
 </head>
@@ -58,13 +60,18 @@
                                     <option value="all">All Courses</option>
                                 </select>
                             </div>
+                            <div>
+                                <a class="btn btn-primary" id="add" href="newcourse.html" role="button" title="Add Course" data-toggle="tooltip">
+                                    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8 offset-sm-2">
-                    <table class="table table-striped" id="tableCourses">
+                <div class="col-sm-10 offset-sm-1">
+                    <table class="table  table-bordered table-striped" id="tableCourses">
                         <thead id="thead">
                         </thead>
                         <tbody id="tbody">

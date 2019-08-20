@@ -23,8 +23,14 @@ $(document).ready(function() {
     let urlParams = new URLSearchParams(location.search);
     let courseId = urlParams.get("id");
 
+
     $("#register").prop("href", "register.html?id=" + courseId)
+        // if (edit == 'true') {
+        //     displayCourseEditMode(courseId)
+        // } else 
+
     displayCourse(courseId);
+
 
     $("#cancel").on('click', function() {
         window.history.back();
@@ -44,6 +50,7 @@ $(document).ready(function() {
                 if (key == "Students") {
                     markup = "<tr><th>" + val + "</th><td>" + course[key].length + "</td></tr>"
                 } else {
+                    console.log(course[key]);
                     markup = "<tr><th>" + val + "</th><td>" + course[key] + "</td></tr>"
                 }
                 $("#tbody").append(markup);
@@ -55,8 +62,11 @@ $(document).ready(function() {
                 addToTable(course.Students);
             }
         });
-        $("#tableCourse").addClass("table-striped");
+        // $("#tableCourse").addClass("table-striped");
     };
+
+
+
 
     /**
      * Display the students information in the table rows.
@@ -65,17 +75,19 @@ $(document).ready(function() {
     function addToTable(students) {
         students.forEach(function(e) {
 
-            let buttons = '<td>' +
-                '<a class="add mr-2" title="Add" data-toggle="tooltip">' +
-                '<i class="fa fa-plus fa-lg" aria-hidden="true"></i>' +
-                '</a>' +
-                '<a class="edit mr-2" title="Edit" data-toggle="tooltip">' +
-                '<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>' +
-                '</a>' +
-                '<a class="delete" title="Delete" data-toggle="tooltip">' +
-                '<i class="fa fa-trash fa-lg" aria-hidden="true"></i>' +
-                '</a>' +
-                '</td>';
+            let buttons = `<td><span>
+                <a class="save mr-2" title="Save" data-toggle="tooltip">
+                <i class="fas fa-save fa-lg"></i></a>
+                <a class="add mr-2" title="Add" data-toggle="tooltip">
+                <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                </a>
+                <a class="edit mr-2" title="Edit" data-toggle="tooltip">
+                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                </a>
+                <a class="delete" title="Delete" data-toggle="tooltip">
+                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                </a></span>
+                </td>`;
             let markup = "<tr><td>" + e.StudentName + "</td><td>" + e.Email + "</td>" + buttons + "</tr>";
 
             $("#tableStudents").append(markup);

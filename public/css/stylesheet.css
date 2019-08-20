@@ -104,52 +104,11 @@ legend.scheduler-border {
 }
 
 
-/********************/
-
-input:focus:invalid {
-    color: #c33;
-    border-color: #c33;
-}
-
-input:focus:invalid:focus {
-    border-color: #c33;
-    -webkit-box-shadow: 0 0 6px #fcc;
-    -moz-box-shadow: 0 0 6px #fcc;
-    box-shadow: 0 0 6px #fcc;
-}
-
-input:invalid {
-    /*border-bottom: 1px solid #c33;*/
-    border: 1px solid #c33;
-}
-
-
-/* input:valid+.invalid
-* Adjacent sibling selector *
-{
-    visibility: hidden;
-} 
-
-input:invalid+.invalid {
-    visibility: visible;
-}
-*/
-
-
-/*
-input:required {
-    border-left: 4px solid #c33;
-}
-input:valid {
-    border-bottom: transparent;
-}*/
-
-.invalid {
-    color: #999;
-}
-
-
 /****************/
+
+table.table td a.save {
+    color: #27C46B;
+}
 
 table.table td a.add {
     color: #27C46B;
