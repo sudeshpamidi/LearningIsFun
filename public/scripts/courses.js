@@ -46,8 +46,7 @@ $(document).ready(function() {
             url = "/api/courses";
         };
 
-        $.get(url, function(json) {
-            let courses = JSON.parse(json);
+        $.getJSON(url, function(courses) {
             addRowHeader();
             addToTable(courses);
         });
