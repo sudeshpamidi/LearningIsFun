@@ -39,14 +39,13 @@ $(document).ready(function() {
         let url = "/api/courses/" + courseId;
         $.get(url, function(data) {
             let course = JSON.parse(data);
-            Object.keys(courseLabels).forEach(function(key, i) {
+            $.each(courseLabels, function(key, val) {
                 let markup
                 if (key == "Students") {
-                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key].length + "</td></tr>"
+                    markup = "<tr><th>" + val + "</th><td>" + course[key].length + "</td></tr>"
                 } else {
-                    markup = "<tr><th>" + courseLabels[key] + "</th><td>" + course[key] + "</td></tr>"
+                    markup = "<tr><th>" + val + "</th><td>" + course[key] + "</td></tr>"
                 }
-
                 $("#tbody").append(markup);
             });
 
@@ -55,10 +54,8 @@ $(document).ready(function() {
                 addRowHeader();
                 addToTable(course.Students);
             }
-
-            $("#tableCourse").addClass("table-striped");
-
         });
+        $("#tableCourse").addClass("table-striped");
     };
 
     /**
@@ -66,9 +63,21 @@ $(document).ready(function() {
      * @param {object} students 
      */
     function addToTable(students) {
-        console.log(students);
         students.forEach(function(e) {
-            let markup = "<tr><td>" + e.StudentName + "</td><td>" + e.Email + "</td></tr>";
+
+            let buttons = '<td>' +
+                '<a class="add mr-2" title="Add" data-toggle="tooltip">' +
+                '<i class="fa fa-plus fa-lg" aria-hidden="true"></i>' +
+                '</a>' +
+                '<a class="edit mr-2" title="Edit" data-toggle="tooltip">' +
+                '<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>' +
+                '</a>' +
+                '<a class="delete" title="Delete" data-toggle="tooltip">' +
+                '<i class="fa fa-trash fa-lg" aria-hidden="true"></i>' +
+                '</a>' +
+                '</td>';
+            let markup = "<tr><td>" + e.StudentName + "</td><td>" + e.Email + "</td>" + buttons + "</tr>";
+
             $("#tableStudents").append(markup);
         });
     };
@@ -86,7 +95,7 @@ $(document).ready(function() {
      * add the row header to the student table.
      */
     function addRowHeader() {
-        let markup = "<tr><th>Student Name</th><th>Email</th></tr>"
+        let markup = "<tr><th>Student Name</th><th>Email</th><th>edit</th></tr>"
         $("#tableStudents").append(markup)
     }
 
