@@ -52,7 +52,6 @@ $(document).ready(function() {
         });
     };
 
-
     /**
      * This is to fill the dropDown with the data in array of elements.
      * @param {*} dropdown  -- dropdown name 
@@ -75,7 +74,10 @@ $(document).ready(function() {
      */
     function addToTable(data) {
         data.forEach(function(e) {
-            let url = "<a href='details.html?id=" + e.CourseId + "'>Details</a>";
+            let url = `<span>
+                        <a href='details.html?id=${e.CourseId}'><i class='fas fa-info-circle fa-lg' title='Details' data-toggle='tooltip'></i></a>
+                        <a class='edit mr-2' title='Edit' data-toggle='tooltip' href='course.html?id=${e.CourseId}&edit=true'><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></a>
+                    </span>`
             let markup = "<tr><td>" + e.Title + "</td><td>" + e.StartDate + "</td><td>" + e.Location + "</td><td>" + url + "</td></tr>";
             $("#tableCourses").append(markup);
         });

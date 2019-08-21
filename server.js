@@ -1,163 +1,49 @@
 let express = require('express');
-
-
 let bodyParser = require('body-parser');
-
-
 let fs = require("fs");
-
-
 let app = express();
 
-
-
-
 // Create application/x-www-form-urlencoded parser
-
-
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
-
-
-function logOneCourse(course)
-
-
-{
-
-
+function logOneCourse(course) {
     console.log("ID: " + course.CourseId +
 
-
         " Title:" + course.Title +
-
-
         " Location:" + course.Location +
-
-
         " Starts:" + course.StartDate +
-
-
         " Ends:" + course.EndDate +
-
-
         " Meets:" + course.Meets +
-
-
         " Fee:" + course.Fee +
-
-
         " Enrollment: " + course.Students.length);
-
-
-
-
-
 }
 
-
-
-
-function logArrayOfCourses(arr)
-
-
-{
-
-
-    for (let i = 0; i < arr.length; i++)
-
-
-    {
-
-
+function logArrayOfCourses(arr) {
+    for (let i = 0; i < arr.length; i++) {
         logOneCourse(arr[i])
-
-
     }
-
-
 }
 
-
-
-
-function getMatchingCourseById(id, data)
-
-
-{
-
-
+function getMatchingCourseById(id, data) {
     let match = null;
-
-
-    for (let i = 0; i < data.length; i++)
-
-
-    {
-
-
-        if (data[i].CourseId == id)
-
-
-        {
-
-
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].CourseId == id) {
             match = data[i];
-
-
             break;
-
-
         }
-
-
     }
-
-
     return match;
-
-
 }
 
-
-
-
-function getCategoryTextByValue(value, data)
-
-
-{
-
-
+function getCategoryTextByValue(value, data) {
     let match = null;
-
-
-    for (let i = 0; i < data.length; i++)
-
-
-    {
-
-
-        if (data[i].Value == value)
-
-
-        {
-
-
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].Value == value) {
             match = data[i];
-
-
             break;
-
-
         }
-
-
     }
-
-
     return match;
-
-
 }
 
 
@@ -204,62 +90,33 @@ function getMatchingCoursesByCategory(category, data)
 
 
 /* THIS CODE ALLOWS REQUESTS FOR THE PAGES */
-
-
-
-
 app.get('/', function(req, res) {
-
-
     res.sendFile(__dirname + "/public/" + "index.html");
-
-
 })
-
-
-
 
 app.get('/index.html', function(req, res) {
-
-
     res.sendFile(__dirname + "/public/" + "index.html");
-
-
 })
-
-
-
 
 app.get('/courses.html', function(req, res) {
-
-
     res.sendFile(__dirname + "/public/" + "courses.html");
-
-
 })
-
-
-
 
 app.get('/details.html', function(req, res) {
-
-
     res.sendFile(__dirname + "/public/" + "details.html");
-
-
 })
-
-
-
 
 app.get('/register.html', function(req, res) {
-
-
     res.sendFile(__dirname + "/public/" + "register.html");
-
-
 })
 
+app.get('/course', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "course.html");
+})
+
+app.get('/course.html', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "course.html");
+})
 
 
 
@@ -343,51 +200,22 @@ app.get('/api/courses', function(req, res) {
 
 app.get('/api/courses/:id', function(req, res) {
 
-
     let id = req.params.id;
 
-
     console.log("Got a GET request for course " + id);
-
-
-
-
     let data = fs.readFileSync(__dirname + "/data/" + "coursesOffered.json", 'utf8');
-
-
     data = JSON.parse(data);
 
-
-
-
     let match = getMatchingCourseById(id, data)
-
-
-    if (match == null)
-
-
-    {
-
-
-        res.status(404).send('Not Found');
-
-
+    if (match == null) {
+        //res.status(404).send('Not Found');
+        res.status(204).send('No Content');
         return;
-
-
     }
 
-
-
-
     //console.log( "Returned data is: " );
-
-
     //logOneCourse(match);
-
-
     res.end(JSON.stringify(match));
-
 
 })
 
@@ -458,88 +286,34 @@ app.get('/api/courses/bycategory/:id', function(req, res) {
 
 
 app.post('/api/register', urlencodedParser, function(req, res) {
-
-
     console.log("Got a POST request to register student");
-
-
     console.log("BODY -------->" + JSON.stringify(req.body));
 
-
-
-
     let selectedCourseId = req.body.courseid;
-
-
     let student = {
-
-
         StudentName: req.body.studentname,
-
-
         Email: req.body.email
-
-
     };
 
-
-
-
     let data = fs.readFileSync(__dirname + "/data/" + "coursesOffered.json", 'utf8');
-
-
     data = JSON.parse(data);
 
-
-
-
     // Find the course
-
-
     let match = getMatchingCourseById(selectedCourseId, data)
-
-
     console.log("match is " + match)
 
-
-    if (match == null)
-
-
-    {
-
-
+    if (match == null) {
         res.status(404).send('Not Found');
-
-
         return;
-
-
     }
 
-
     // Then add the student
-
-
     match.Students[match.Students.length] = student;
-
-
-
-
     fs.writeFileSync(__dirname + "/data/" + "coursesOffered.json", JSON.stringify(data));
 
-
-
-
-
     console.log('Courses saved with new student added!');
-
-
     // console.log(student.StudentName + " at: " + student.Email)
-
-
     res.status(200).send();
-
-
 })
 
 
@@ -696,92 +470,33 @@ app.post('/api/unregister', urlencodedParser, function(req, res) {
 
 })
 
-
-
-
 // ADD A COURSE 
-
-
 app.post('/api/courses', urlencodedParser, function(req, res) {
-
-
     console.log("Got a POST request to add course");
-
-
     console.log("BODY -------->" + JSON.stringify(req.body));
 
-
-
-
     let data = fs.readFileSync(__dirname + "/data/" + "coursesOffered.json", 'utf8');
-
-
     data = JSON.parse(data);
-
-
-
-
     let course = {
-
-
         CourseId: req.body.courseid,
-
-
         Title: req.body.title,
-
-
         Category: req.body.category,
-
-
         Location: req.body.location,
-
-
         StartDate: req.body.startdate,
-
-
         EndDate: req.body.enddate,
-
-
         Meets: req.body.meets,
-
-
         Fee: req.body.fee,
-
-
         Students: []
-
-
     };
 
-
-
-
     data[data.length] = course;
-
-
-
-
     //console.log("New course catalog: ");
-
-
     //logArrayOfCourses(data); 
-
-
     fs.writeFileSync(__dirname + "/data/" + "coursesOffered.json", JSON.stringify(data));
 
-
-
-
-
     console.log('New course saved!');
-
-
     //logOneCourse(course);    
-
-
     res.status(200).send();
-
-
 })
 
 
