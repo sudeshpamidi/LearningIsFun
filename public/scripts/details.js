@@ -84,7 +84,7 @@ $(document).ready(function() {
                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                 </a></span>
                 </td>`;
-            let markup = "<tr><td>" + e.StudentName + "</td><td>" + e.Email + "</td>" + buttons + "</tr>";
+            let markup = "<tr><td class='stdname'>" + e.StudentName + "</td><td class='stdemail'>" + e.Email + "</td>" + buttons + "</tr>";
 
             $("#tableStudents").append(markup);
 
@@ -100,28 +100,34 @@ $(document).ready(function() {
 
         /** Delete event handling */
         $(".delete").on("click", function() {
+            /*
             var input = $(this).parents("tr").find(".inputcontrol");
-
             input.each(function() {
                 $(this).parent("td").html($(this).val());
+                console.log($(this));
+                alert($(this));
+            });
+            */
+            let postData = "courseid=" + courseId;
+
+            $(this).parents("tr").find("td:not(:last-child)").each(function(key, value) {
+                if (key == "0")
+                    postData = postData + "&studentname=" + $(this).text();
+                else
+                    postData = postData + "&email=" + $(this).text();
             });
 
             let url = "/api/unregister";
-            let postData = "courseid=19FPRO49" +
-                "&studentname=sudesh" +
-                "&email=Sudesh";
-
-
-            // $.ajax({
-            //         url: url,
-            //         type: "POST",
-            //         data: postData
-            //     })
-            //     .done(function() {
-            //         $(this).parents("tr").remove();
-            //     });
-
-
+            $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: postData
+                })
+                .done(function() {
+                    alert('Came Back');
+                    //$(this).parents("tr").remove();
+                });
+            $(this).parents("tr").remove();
         });
 
         $(".save").on("click", function() {

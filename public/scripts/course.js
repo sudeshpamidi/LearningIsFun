@@ -42,6 +42,7 @@ $(document).ready(function() {
             })
             .done(function() {
                 displayMessage("Course has been added/edited.");
+                $("#save, h2").html("Edit Course");
             })
             .fail(function() {
                 console.log('Opps.. something went wrong in while creating the course.');
