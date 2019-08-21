@@ -50,7 +50,6 @@ $(document).ready(function() {
                 if (key == "Students") {
                     markup = "<tr><th>" + val + "</th><td>" + course[key].length + "</td></tr>"
                 } else {
-                    console.log(course[key]);
                     markup = "<tr><th>" + val + "</th><td>" + course[key] + "</td></tr>"
                 }
                 $("#tbody").append(markup);
@@ -65,9 +64,6 @@ $(document).ready(function() {
         // $("#tableCourse").addClass("table-striped");
     };
 
-
-
-
     /**
      * Display the students information in the table rows.
      * @param {object} students 
@@ -78,8 +74,8 @@ $(document).ready(function() {
             let buttons = `<td><span>
                 <a class="save mr-2" title="Save" data-toggle="tooltip">
                 <i class="fas fa-save fa-lg"></i></a>
-                <a class="add mr-2" title="Add" data-toggle="tooltip">
-                <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                <a class="cancel mr-2" title="Cancel" data-toggle="tooltip">                
+                <i class="fas fa-undo fa-lg" aria-hidden="true"></i>
                 </a>
                 <a class="edit mr-2" title="Edit" data-toggle="tooltip">
                 <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
@@ -91,7 +87,79 @@ $(document).ready(function() {
             let markup = "<tr><td>" + e.StudentName + "</td><td>" + e.Email + "</td>" + buttons + "</tr>";
 
             $("#tableStudents").append(markup);
+
         });
+
+        /** edit event handling */
+        $(".edit").on("click", function() {
+            $(this).parents("tr").find("td:not(:last-child)").each(function() {
+                $(this).html('<input type="text" class="form-control inputcontrol" value="' + $(this).text() + '">');
+            });
+            $(this).parents("tr").find(".cancel, .save, .edit").toggle();
+        });
+
+        /** Delete event handling */
+        $(".delete").on("click", function() {
+            var input = $(this).parents("tr").find(".inputcontrol");
+
+            input.each(function() {
+                $(this).parent("td").html($(this).val());
+            });
+
+            let url = "/api/unregister";
+            let postData = "courseid=19FPRO49" +
+                "&studentname=sudesh" +
+                "&email=Sudesh";
+
+
+            // $.ajax({
+            //         url: url,
+            //         type: "POST",
+            //         data: postData
+            //     })
+            //     .done(function() {
+            //         $(this).parents("tr").remove();
+            //     });
+
+
+        });
+
+        $(".save").on("click", function() {
+
+            var valid = false;
+            var input = $(this).parents("tr").find(".inputcontrol");
+
+
+            //Validate the control's data.
+            input.each(function() {
+                if (!$(this).val()) {
+                    $(this).addClass("error");
+                    valid = true;
+                } else {
+                    $(this).removeClass("error");
+                }
+            });
+            $(this).parents("tr").find(".error").first().focus();
+
+            if (!valid) {
+                input.each(function() {
+                    $(this).parent("td").html($(this).val());
+                });
+                $(this).parents("tr").find(".cancel, .save, .edit").toggle();
+            }
+
+
+        });
+
+        $(".cancel").on("click", function() {
+            var input = $(this).parents("tr").find(".inputcontrol");
+            input.each(function() {
+                $(this).parent("td").html($(this).val());
+            });
+            $(this).parents("tr").find(".cancel, .save, .edit").toggle();
+        });
+
+
     };
 
     /**
@@ -110,5 +178,7 @@ $(document).ready(function() {
         let markup = "<tr><th>Student Name</th><th>Email</th><th>edit</th></tr>"
         $("#tableStudents").append(markup)
     }
+
+
 
 });

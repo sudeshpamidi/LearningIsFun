@@ -130,7 +130,6 @@ app.get('/course.html', function(req, res) {
 
 app.get('/api/categories', function(req, res) {
 
-
     console.log("Got a GET request for categories");
 
 
@@ -323,139 +322,48 @@ app.post('/api/register', urlencodedParser, function(req, res) {
 
 
 app.post('/api/unregister', urlencodedParser, function(req, res) {
-
-
     console.log("Got a POST request to un-enroll student");
-
-
     console.log(req);
-
-
     console.log("BODY ------> " + JSON.stringify(req.body));
 
-
-
-
-
     let enrollmentRecord = {
-
-
         CourseId: req.body.courseid,
-
-
         StudentName: req.body.studentname,
-
-
         Email: req.body.email
-
-
     };
 
-
-
-
-
     let data = fs.readFileSync(__dirname + "/data/" + "coursesOffered.json", 'utf8');
-
-
     data = JSON.parse(data);
 
-
-
-
     // Find course
-
-
     let match = getMatchingCourseById(enrollmentRecord.CourseId, data);
-
-
-    if (match == null)
-
-
-    {
-
-
+    if (match == null) {
         res.status(404).send('Not Found');
-
-
         return;
-
-
     }
-
-
     console.log("Match: " + match.Title)
 
-
-
-
-
     // Find student to remove
-
-
     let foundAt = -1;
-
-
-    for (let i = 0; i < match.Students.length; i++)
-
-
-    {
-
-
+    for (let i = 0; i < match.Students.length; i++) {
         if (match.Students[i].StudentName == enrollmentRecord.StudentName &&
-
-
-            match.Students[i].Email == enrollmentRecord.Email)
-
-
-        {
-
-
+            match.Students[i].Email == enrollmentRecord.Email) {
             foundAt = i;
-
-
             console.log("Student is #" + i);
-
-
             break;
-
-
         }
-
-
     }
-
-
-    if (foundAt == -1)
-
-
-    {
-
-
+    if (foundAt == -1) {
         res.status(404).send('Not Found');
-
-
         return;
-
-
     }
-
-
-
 
     // Remove student
-
-
     //console.log("Size of students array before delete: " + match.Students.length)
 
 
     let removedStudent = match.Students.splice(foundAt, 1);
-
-
     //console.log("Size of students array after delete: " + match.Students.length)
-
-
-
 
     fs.writeFileSync(__dirname + "/data/" + "coursesOffered.json", JSON.stringify(data));
 
