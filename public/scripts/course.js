@@ -35,7 +35,6 @@ $(document).ready(function() {
             type = ($(this).html() == "Edit Course" ? "PUT" : "POST");
 
         console.log("postData : " + postData);
-
         $.ajax({
                 url: url,
                 type: type,
