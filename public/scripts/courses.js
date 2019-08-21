@@ -74,13 +74,10 @@ $(document).ready(function() {
      */
     function addToTable(data) {
         data.forEach(function(e) {
-
             let url = `<span>
                         <a href='details.html?id=${e.CourseId}'><i class='fas fa-info-circle fa-lg' title='Details' data-toggle='tooltip'></i></a>
-                        <a class='edit mr-2' title='Edit' data-toggle='tooltip' href='newcourse.html?id=${e.CourseId}&edit=true'><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></a>
+                        <a class='edit mr-2' title='Edit' data-toggle='tooltip' href='course.html?id=${e.CourseId}&edit=true'><i class='fa fa-pencil fa-lg' aria-hidden='true'></i></a>
                     </span>`
-
-
             let markup = "<tr><td>" + e.Title + "</td><td>" + e.StartDate + "</td><td>" + e.Location + "</td><td>" + url + "</td></tr>";
             $("#tableCourses").append(markup);
         });

@@ -18,109 +18,32 @@ function logOneCourse(course) {
         " Enrollment: " + course.Students.length);
 }
 
-
-
-
-function logArrayOfCourses(arr)
-
-
-{
-
-
-    for (let i = 0; i < arr.length; i++)
-
-
-    {
-
-
+function logArrayOfCourses(arr) {
+    for (let i = 0; i < arr.length; i++) {
         logOneCourse(arr[i])
-
-
     }
-
-
 }
 
-
-
-
-function getMatchingCourseById(id, data)
-
-
-{
-
-
+function getMatchingCourseById(id, data) {
     let match = null;
-
-
-    for (let i = 0; i < data.length; i++)
-
-
-    {
-
-
-        if (data[i].CourseId == id)
-
-
-        {
-
-
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].CourseId == id) {
             match = data[i];
-
-
             break;
-
-
         }
-
-
     }
-
-
     return match;
-
-
 }
 
-
-
-
-function getCategoryTextByValue(value, data)
-
-
-{
-
-
+function getCategoryTextByValue(value, data) {
     let match = null;
-
-
-    for (let i = 0; i < data.length; i++)
-
-
-    {
-
-
-        if (data[i].Value == value)
-
-
-        {
-
-
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].Value == value) {
             match = data[i];
-
-
             break;
-
-
         }
-
-
     }
-
-
     return match;
-
-
 }
 
 
@@ -167,10 +90,6 @@ function getMatchingCoursesByCategory(category, data)
 
 
 /* THIS CODE ALLOWS REQUESTS FOR THE PAGES */
-
-
-
-
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/public/" + "index.html");
 })
@@ -191,12 +110,12 @@ app.get('/register.html', function(req, res) {
     res.sendFile(__dirname + "/public/" + "register.html");
 })
 
-app.get('/newcourse', function(req, res) {
-    res.sendFile(__dirname + "/public/" + "newcourse.html");
+app.get('/course', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "course.html");
 })
 
-app.get('/newcourse.html', function(req, res) {
-    res.sendFile(__dirname + "/public/" + "newcourse.html");
+app.get('/course.html', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "course.html");
 })
 
 
@@ -289,7 +208,8 @@ app.get('/api/courses/:id', function(req, res) {
 
     let match = getMatchingCourseById(id, data)
     if (match == null) {
-        res.status(404).send('Not Found');
+        //res.status(404).send('Not Found');
+        res.status(204).send('No Content');
         return;
     }
 
