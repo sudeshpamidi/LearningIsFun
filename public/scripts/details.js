@@ -80,11 +80,12 @@ $(document).ready(function() {
                 <a class="edit mr-2" title="Edit" data-toggle="tooltip">
                 <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                 </a>
-                <a class="delete" title="Delete" data-toggle="tooltip">
-                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                <a class="delete" title="Unregister" data-toggle="modal" data-target="#exampleModal">                
+                <i class="fas fa-user-minus fa-lg" aria-hidden="true"></i>
                 </a></span>
                 </td>`;
-            let markup = "<tr><td class='stdname'>" + e.StudentName + "</td><td class='stdemail'>" + e.Email + "</td>" + buttons + "</tr>";
+
+            let markup = `<tr><td>${e.StudentName}</td><td>${e.Email}</td>${buttons}</tr>`;
 
             $("#tableStudents").append(markup);
 
@@ -108,8 +109,9 @@ $(document).ready(function() {
                 alert($(this));
             });
             */
-            let postData = "courseid=" + courseId;
+            let row = $(this);
 
+            let postData = "courseid=" + courseId;
             $(this).parents("tr").find("td:not(:last-child)").each(function(key, value) {
                 if (key == "0")
                     postData = postData + "&studentname=" + $(this).text();
@@ -117,21 +119,29 @@ $(document).ready(function() {
                     postData = postData + "&email=" + $(this).text();
             });
 
-            let url = "/api/unregister";
-            $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: postData
-                })
-                .done(function() {
-                    alert('Came Back');
-                    //$(this).parents("tr").remove();
-                });
-            $(this).parents("tr").remove();
+            $("#btnConfirm").on('click', function() {
+                console.log(postData);
+                let url = "/api/unregister";
+                $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: postData
+                    })
+                    .done(function() {
+                        //$(this).parents("tr").remove();
+                        row.parents("tr").remove();
+                    });
+                //$(this).parents("tr").remove();
+                //$.modal.close();
+                $("#exampleModal").modal('hide');
+            });
+
+
+
+
         });
 
         $(".save").on("click", function() {
-
             var valid = false;
             var input = $(this).parents("tr").find(".inputcontrol");
 
@@ -181,10 +191,8 @@ $(document).ready(function() {
      * add the row header to the student table.
      */
     function addRowHeader() {
-        let markup = "<tr><th>Student Name</th><th>Email</th><th>edit</th></tr>"
+        let markup = "<tr><th>Student Name</th><th>Email</th><th>Edit/Unregister</th></tr>"
         $("#tableStudents").append(markup)
     }
-
-
 
 });

@@ -18,9 +18,10 @@ $(document).ready(function() {
     }
 
     $("#courseid").on({
-        //blur: function() {
-        //    getCourse($(this).val().trim());
-        //},
+        // blur: function() {
+        //     //    getCourse($(this).val().trim());
+        //     //$("#courseid").popover("hide");
+        // },
         keyup: function() {
             getCourse($(this).val().trim());
         }
@@ -34,7 +35,6 @@ $(document).ready(function() {
         let url = "/api/courses",
             type = ($(this).html() == "Edit Course" ? "PUT" : "POST");
 
-        console.log("postData : " + postData);
         $.ajax({
                 url: url,
                 type: type,
@@ -116,7 +116,17 @@ $(document).ready(function() {
             $("#save, h2").html("Edit Course");
 
         } else {
+
             $("#courseid").popover("hide");
+
+            $("#title").val("");
+            $("#location").val("");
+            $("#startdate").val("");
+            $("#enddate").val("");
+            $("#fee").val("");
+            $("#meets").val("");
+
+
             $("#save").html("Add Course");
             $("h2").html("New Course");
         }
@@ -129,9 +139,10 @@ $(document).ready(function() {
 
         elements.popover({
             trigger: 'focus',
-            placement: 'right',
-            content: "Course is already exist. It will be edited."
+            placement: 'right' //,
+                //content: "Course is already exist. It will be edited."
         });
+
 
         var validate = function(formSelector) {
             elementCount = 0;
@@ -151,7 +162,6 @@ $(document).ready(function() {
         return {
             validate: validate // expose outside to utilize
         };
-
     };
     var validator = new ValidationUtility();
 

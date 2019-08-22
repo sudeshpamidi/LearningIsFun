@@ -43,7 +43,8 @@ $(document).ready(function() {
     }
 
     $("#cancel").on('click', function() {
-        window.history.back();
+        //window.history.back();
+        window.location = "details.html?id=19FPRO49";
     });
 
     /**
